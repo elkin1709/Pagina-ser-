@@ -1,0 +1,104 @@
+.galleta-contenido {
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.galleta-animacion {
+    margin-bottom: 30px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 120px;
+}
+
+.galleta {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+}
+
+.galleta-parte {
+    width: 40px;
+    height: 80px;
+    background: linear-gradient(45deg, #8B4513, #D2691E, #CD853F);
+    border-radius: 40px 0 0 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.8s ease-in-out;
+}
+
+.galleta-derecha {
+    border-radius: 0 40px 40px 0;
+    left: 40px;
+}
+
+.galleta.rompida .galleta-izquierda {
+    transform: translateX(-20px) rotate(-15deg);
+}
+
+.galleta.rompida .galleta-derecha {
+    transform: translateX(20px) rotate(15deg);
+}
+
+.frase-fortuna {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border-left: 4px solid var(--accent);
+    text-align: left;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    animation: aparecerFrase 0.8s ease-out;
+    box-shadow: 0 2px 8px 0 var(--border);
+}
+
+.boton-nueva-frase {
+    background: linear-gradient(90deg, #7f53ac 0%, #647dee 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 2px 16px 0 #3a1c7155;
+    transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    margin-top: 20px;
+}
+
+.boton-nueva-frase:hover {
+    background: linear-gradient(90deg, #232526 0%, #7f53ac 100%);
+    color: #e0d7ff;
+    box-shadow: 0 4px 32px 0 #7f53ac99;
+}
+
+@keyframes aparecerFrase {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-contenido.galleta-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    min-height: 320px;
+    margin: auto;
+} 
