@@ -101,4 +101,35 @@
     min-width: 320px;
     min-height: 320px;
     margin: auto;
+}
+
+@media (max-width: 700px) {
+  .galleta-animacion {
+    width: 80px;
+    height: 80px;
+  }
+  .galleta {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (max-width: 500px) {
+  .galleta-animacion {
+    width: 60px;
+    height: 60px;
+  }
+  .galleta {
+    width: 40px;
+    height: 40px;
+  }
+  .frase-fortuna {
+    font-size: 0.95rem;
+    padding: 10px;
+    min-height: 40px;
+  }
+  .modal-contenido.galleta-contenido {
+    min-width: 0;
+    min-height: 0;
+    padding: 8px 2vw;
+  }
 } 
