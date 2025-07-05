@@ -508,6 +508,14 @@ body.tema-oscuro {
 }
 @media (max-width: 600px) {
   .decor-star, .decor-anim { display: none; }
+  .typing {
+    white-space: normal;
+    width: 100%;
+    font-size: 1rem;
+    word-break: break-word;
+    border-right: 2px solid var(--accent);
+    overflow: hidden;
+  }
 }
 
 .boton-tema {

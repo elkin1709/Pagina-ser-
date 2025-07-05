@@ -509,12 +509,19 @@ body.tema-oscuro #boton-iniciar .star-6 {
   position: fixed;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.8;
   font-family: 'Arial', sans-serif;
   user-select: none;
   transition: opacity 0.3s;
   color: var(--star-color) !important;
+  animation: starTwinkle 2.5s infinite alternate;
 }
+@keyframes starTwinkle {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
 .star1 { top: 8%; left: 10%; font-size: 2.2rem; color: #b983ff; }
 .star2 { top: 18%; right: 12%; font-size: 1.7rem; color: #fff; }
 .star3 { bottom: 12%; left: 14%; font-size: 1.3rem; color: #f7c8ff; }
@@ -678,16 +685,18 @@ body.tema-oscuro #boton-iniciar .star-6 {
 }
 .close-racha {
   position: absolute;
-  top: 18px;
-  right: 24px;
+  top: 10px;
+  right: 14px;
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: #2d193c;
   cursor: pointer;
   opacity: 0.7;
   transition: opacity 0.2s;
   z-index: 10;
+  padding: 2px 6px;
+  line-height: 1;
 }
 .close-racha:hover {
   opacity: 1;
@@ -725,6 +734,7 @@ body.tema-oscuro #boton-iniciar .star-6 {
   .frase {
     font-size: 1rem;
   }
+  .decor-star { font-size: 1.1rem !important; }
 }
 @media (max-width: 700px) {
   .container, .modal-contenido, .racha-card {
@@ -745,9 +755,7 @@ body.tema-oscuro #boton-iniciar .star-6 {
     left: 8px !important;
     right: 8px !important;
   }
-  .decor-star {
-    font-size: 1.1rem !important;
-  }
+  .decor-star { font-size: 1rem !important; }
 }
 @media (max-width: 500px) {
   .container, .modal-contenido, .racha-card {
@@ -764,14 +772,25 @@ body.tema-oscuro #boton-iniciar .star-6 {
   .decor-anim, .persona-pensando, .decor-planeta {
     display: none !important;
   }
-  .decor-star {
-    display: none !important;
-  }
+  .decor-star { font-size: 0.8rem !important; }
   .boton-tema {
-    left: 4px;
-    bottom: 4px;
+    left: 8px;
+    bottom: 8px;
+    right: auto;
+    top: auto;
     font-size: 0.95rem;
-    padding: 4px 10px 4px 8px;
+    padding: 6px 14px 6px 10px;
+    min-width: 0;
+    border-radius: 32px;
+    height: 38px;
+    width: auto;
+    box-shadow: 0 2px 8px 0 var(--border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #icono-tema {
+    font-size: 1.2em;
   }
   button, #boton-iniciar {
     width: 100%;
@@ -783,6 +802,12 @@ body.tema-oscuro #boton-iniciar .star-6 {
     width: 100%;
     font-size: 1rem;
     padding: 10px 8px;
+  }
+  .close-racha {
+    top: 6px;
+    right: 8px;
+    font-size: 1.05rem;
+    padding: 1px 4px;
   }
 }
 
