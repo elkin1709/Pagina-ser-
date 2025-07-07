@@ -55,8 +55,34 @@ if (opcionesReligion.length) {
         btn.addEventListener('click', function() {
             const modalReligion = document.getElementById('modal-religion');
             const modalCreencias = document.getElementById('modal-creencias');
+            const modalRacha = document.getElementById('modal-racha');
             if (modalReligion) modalReligion.classList.add('oculto');
-            if (modalCreencias) modalCreencias.classList.remove('oculto');
+            if (btn.dataset.religion === 'no') {
+                // Saltar creencias y mostrar racha directamente
+                let racha = parseInt(localStorage.getItem('rachaDias') || '0', 10);
+                racha++;
+                localStorage.setItem('rachaDias', racha);
+                const frasesRacha = [
+                    '¡Sigue así, cada día cuenta!',
+                    'Tu constancia te acerca a tus sueños.',
+                    'Hoy es un gran día para crecer.',
+                    '¡Un paso más, un logro más!',
+                    'La motivación se construye día a día.',
+                    '¡Eres capaz de todo lo que te propones!',
+                    'Cada día suma en tu camino.',
+                    '¡No te detengas, vas muy bien!',
+                    'La disciplina es tu superpoder.',
+                    '¡Hoy también elegiste avanzar!'
+                ];
+                const frase = frasesRacha[Math.floor(Math.random() * frasesRacha.length)];
+                const rachaNumero = document.getElementById('racha-numero');
+                const rachaFrase = document.getElementById('racha-frase');
+                if (rachaNumero) rachaNumero.textContent = racha;
+                if (rachaFrase) rachaFrase.textContent = frase;
+                if (modalRacha) modalRacha.classList.remove('oculto');
+            } else {
+                if (modalCreencias) modalCreencias.classList.remove('oculto');
+            }
         });
     });
 }
@@ -334,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Fondo de puntitos brillantes y estrellas fugaces
+// Fondo de puntitos brillantes y estrellas fugaces (también para frases.html)
 (function() {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
@@ -345,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let stars = [];
   let shootingStars = [];
   const STAR_COUNT = Math.floor((w * h) / 1800);
-  const SHOOTING_STAR_FREQ = 0.012; // probabilidad por frame
+  const SHOOTING_STAR_FREQ = 0.012;
 
   function resize() {
     w = window.innerWidth;

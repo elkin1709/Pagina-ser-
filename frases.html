@@ -7,79 +7,79 @@
     <link rel="stylesheet" href="frases.css">
 </head>
 <body>
-  <button id="boton-tema" class="boton-tema" title="Cambiar tema">
-    <span id="icono-tema">🌙</span> Tema
-  </button>
-  <img src="img/planeta.png" class="decor-anim decor-planeta" alt="planeta decorativo">
-  <img src="img/persona.png" class="decor-anim decor-persona" alt="persona meditando decorativa">
-  <span class="decor-star star1">★</span>
-  <span class="decor-star star2">✦</span>
-  <span class="decor-star star3">✧</span>
-  <span class="decor-star star4">★</span>
-  <span class="decor-star star5">✦</span>
-  <span class="decor-star star6">✧</span>
-  <span class="decor-star star7">★</span>
-  <span class="decor-star star8">✦</span>
-  <span class="decor-star star9">✧</span>
-  <div class="fondo-degradado"></div>
-  <canvas id="estrellas-bg"></canvas>
-  <header class="header-frases">
-    <span class="logo-frases">JE PEUX</span>
-  </header>
-  <main class="main-frases">
-    <div class="frase-central"><span id="frase-typing" class="typing"></span></div>
-    <button class="boton-sentimiento" id="boton-sentimiento">¿Cómo te sientes hoy?</button>
-  </main>
+    <canvas id="bg-canvas"></canvas>
+    <button id="boton-tema" class="boton-tema" title="Cambiar tema">
+        <span id="icono-tema">🌙</span> Tema
+    </button>
+    <img src="img/planeta.png" class="decor-anim decor-planeta" alt="planeta decorativo">
+    <img src="img/persona.png" class="decor-anim decor-persona" alt="persona meditando decorativa">
+    <span class="decor-star star1">★</span>
+    <span class="decor-star star2">✦</span>
+    <span class="decor-star star3">✧</span>
+    <span class="decor-star star4">★</span>
+    <span class="decor-star star5">✦</span>
+    <span class="decor-star star6">✧</span>
+    <span class="decor-star star7">★</span>
+    <span class="decor-star star8">✦</span>
+    <span class="decor-star star9">✧</span>
+    <div class="fondo-degradado"></div>
+    <header class="header-frases">
+        <span class="logo-frases">JE PEUX</span>
+    </header>
+    <main class="main-frases">
+        <div class="frase-central"><span id="frase-typing" class="typing"></span></div>
+        <button class="boton-sentimiento" id="boton-sentimiento">¿Cómo te sientes hoy?</button>
+    </main>
 
-  <!-- Modal emociones -->
-  <div id="modal-emocion" class="modal oculto">
-    <div class="modal-contenido">
-      <h2>¿Cómo te sientes hoy?</h2>
-      <div class="opciones-emocion">
-        <button class="opcion-emocion" data-emocion="feliz">Feliz</button>
-        <button class="opcion-emocion" data-emocion="triste">Triste</button>
-        <button class="opcion-emocion" data-emocion="enojado">Enojado</button>
-        <button class="opcion-emocion" data-emocion="ansioso">Ansioso</button>
-        <button class="opcion-emocion" data-emocion="motivado">Motivado</button>
-        <button class="opcion-emocion" data-emocion="cansado">Cansado</button>
-        <button class="opcion-emocion" data-emocion="relajado">Relajado</button>
-        <span class="decor-star star2">✦</span>
-        <span class="decor-star star3">✧</span>
-        <span class="decor-star star4">★</span>
-        <span class="decor-star star5">✦</span>
-        <span class="decor-star star6">✧</span>
-        <span class="decor-star star7">★</span>
-        <span class="decor-star star8">✦</span>
-        <span class="decor-star star9">✧</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal galleta de la fortuna -->
-  <div id="modal-galleta" class="modal oculto">
-    <div class="modal-contenido galleta-contenido">
-      <div class="galleta-animacion">
-        <div class="galleta" id="galleta">
-          <div class="galleta-parte galleta-izquierda"></div>
-          <div class="galleta-parte galleta-derecha"></div>
-            <span class="decor-star star2">✦</span>
-            <span class="decor-star star2">✦</span>
-            <span class="decor-star star3">✧</span>
-            <span class="decor-star star4">★</span>
-            <span class="decor-star star5">✦</span>
-            <span class="decor-star star6">✧</span>
-            <span class="decor-star star7">★</span>
-            <span class="decor-star star8">✦</span>
-            <span class="decor-star star9">✧</span>
+    <!-- Modal emociones -->
+    <div id="modal-emocion" class="modal oculto">
+        <div class="modal-contenido">
+            <h2>¿Cómo te sientes hoy?</h2>
+            <div class="opciones-emocion">
+                <button class="opcion-emocion" data-emocion="feliz">Feliz</button>
+                <button class="opcion-emocion" data-emocion="triste">Triste</button>
+                <button class="opcion-emocion" data-emocion="enojado">Enojado</button>
+                <button class="opcion-emocion" data-emocion="ansioso">Ansioso</button>
+                <button class="opcion-emocion" data-emocion="motivado">Motivado</button>
+                <button class="opcion-emocion" data-emocion="cansado">Cansado</button>
+                <button class="opcion-emocion" data-emocion="relajado">Relajado</button>
+                <span class="decor-star star2">✦</span>
+                <span class="decor-star star3">✧</span>
+                <span class="decor-star star4">★</span>
+                <span class="decor-star star5">✦</span>
+                <span class="decor-star star6">✧</span>
+                <span class="decor-star star7">★</span>
+                <span class="decor-star star8">✦</span>
+                <span class="decor-star star9">✧</span>
+            </div>
         </div>
-      </div>
-      <div class="frase-fortuna" id="frase-fortuna">
-        <!-- La frase se mostrará aquí -->
-      </div>
-      <button class="boton-nueva-frase" id="boton-nueva-frase">Nueva Frase</button>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <!-- Modal galleta de la fortuna -->
+    <div id="modal-galleta" class="modal oculto">
+        <div class="modal-contenido galleta-contenido">
+            <div class="galleta-animacion">
+                <div class="galleta" id="galleta">
+                    <div class="galleta-parte galleta-izquierda"></div>
+                    <div class="galleta-parte galleta-derecha"></div>
+                    <span class="decor-star star2">✦</span>
+                    <span class="decor-star star2">✦</span>
+                    <span class="decor-star star3">✧</span>
+                    <span class="decor-star star4">★</span>
+                    <span class="decor-star star5">✦</span>
+                    <span class="decor-star star6">✧</span>
+                    <span class="decor-star star7">★</span>
+                    <span class="decor-star star8">✦</span>
+                    <span class="decor-star star9">✧</span>
+                </div>
+            </div>
+            <div class="frase-fortuna" id="frase-fortuna">
+                <!-- La frase se mostrará aquí -->
+            </div>
+            <button class="boton-nueva-frase" id="boton-nueva-frase">Nueva Frase</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

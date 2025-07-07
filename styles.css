@@ -221,7 +221,7 @@ body.tema-oscuro #boton-iniciar .star-6 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(13,10,30,0.96);
+    background: rgba(13,10,30,0.72);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,7 +229,7 @@ body.tema-oscuro #boton-iniciar .star-6 {
 }
 
 .modal-contenido {
-    background: #1E1535;
+    background: rgba(30,21,53,0.92);
     color: #EDE9F9;
     padding: 32px 24px;
     border-radius: 18px;
@@ -588,7 +588,8 @@ body.tema-oscuro #boton-iniciar .star-6 {
   z-index: 1000;
 }
 .racha-card {
-  background: linear-gradient(135deg, #b983ff 0%, #f7c8ff 100%);
+  background: rgba(30,21,53,0.92) !important;
+  color: var(--text-main) !important;
   border-radius: 32px;
   box-shadow: 0 8px 40px 0 #2C1F4A55;
   padding: 48px 32px 36px 32px;
@@ -597,10 +598,12 @@ body.tema-oscuro #boton-iniciar .star-6 {
   text-align: center;
   position: relative;
   font-family: 'Montserrat', 'Arial', sans-serif;
-  background: var(--bg-card) !important;
-  color: var(--text-main) !important;
   border-color: var(--border) !important;
   box-shadow: 0 4px 32px 0 var(--border);
+}
+body.tema-claro .racha-card {
+  background: rgba(255,255,255,0.92) !important;
+  color: #2C2C2C !important;
 }
 .racha-estrellas {
   display: flex;
