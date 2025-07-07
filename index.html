@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/galleta.css">
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <button id="boton-tema" class="boton-tema" title="Cambiar tema">
       <span id="icono-tema">🌙</span> Tema
     </button>
@@ -264,7 +265,6 @@
 
     <!-- Modal Racha -->
     <div id="modal-racha" class="modal-racha oculto">
-      <button class="close-racha" id="cerrar-racha">&times;</button>
       <div class="racha-card">
         <div class="racha-estrellas">
           <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#b983ff" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -282,6 +282,7 @@
         <span class="decor-star star7">★</span>
         <span class="decor-star star8">✦</span>
         <span class="decor-star star9">✧</span>
+        <button class="close-racha" id="cerrar-racha">Siguiente</button>
       </div>
     </div>
 

@@ -334,4 +334,118 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Fondo de puntitos brillantes y estrellas fugaces
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = window.innerWidth;
+  let h = window.innerHeight;
+  let dpr = window.devicePixelRatio || 1;
+  let stars = [];
+  let shootingStars = [];
+  const STAR_COUNT = Math.floor((w * h) / 1800);
+  const SHOOTING_STAR_FREQ = 0.012; // probabilidad por frame
+
+  function resize() {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+
+  function randomStar() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.1 + 0.3,
+      alpha: Math.random() * 0.5 + 0.5,
+      twinkle: Math.random() * 0.05 + 0.01,
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push(randomStar());
+    }
+  }
+
+  function drawStars() {
+    for (let s of stars) {
+      s.phase += s.twinkle;
+      let a = s.alpha + Math.sin(s.phase) * 0.3;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, a));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = '#fff';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function randomShootingStar() {
+    const y = Math.random() * h * 0.7;
+    const x = Math.random() < 0.5 ? -80 : w + 80;
+    const dx = x < 0 ? (Math.random() * 4 + 7) : -(Math.random() * 4 + 7);
+    const dy = Math.random() * 1.5 + 0.5;
+    return {
+      x, y,
+      dx, dy,
+      len: Math.random() * 80 + 120,
+      life: 0,
+      maxLife: Math.random() * 0.5 + 0.8
+    };
+  }
+
+  function drawShootingStars() {
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      let s = shootingStars[i];
+      s.x += s.dx;
+      s.y += s.dy;
+      s.life += 0.016;
+      ctx.save();
+      ctx.globalAlpha = 1 - s.life / s.maxLife;
+      let grad = ctx.createLinearGradient(s.x, s.y, s.x - s.dx * s.len, s.y - s.dy * s.len);
+      grad.addColorStop(0, '#fff');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - s.dx * s.len, s.y - s.dy * s.len);
+      ctx.stroke();
+      ctx.restore();
+      if (s.life > s.maxLife) shootingStars.splice(i, 1);
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    drawStars();
+    drawShootingStars();
+    if (Math.random() < SHOOTING_STAR_FREQ) {
+      shootingStars.push(randomShootingStar());
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    resize();
+    createStars();
+  });
+
+  resize();
+  createStars();
+  animate();
+})();
+
 
