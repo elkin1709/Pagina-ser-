@@ -44,15 +44,31 @@ body.tema-claro .modal-contenido {
     box-shadow: 0 4px 32px 0 #D6CBC7 !important;
 }
 body.tema-claro .boton-sentimiento {
-    background: var(--accent) !important;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%) !important;
     color: #2C2C2C !important;
     border: 2px solid var(--accent) !important;
-    box-shadow: 0 2px 16px 0 #D6CBC7 !important;
+    box-shadow: 0 4px 20px 0 var(--accent), 0 8px 32px 0 rgba(250, 212, 207, 0.4) !important;
+    animation: botonPulsarClaro 2s ease-in-out infinite !important;
 }
 body.tema-claro .boton-sentimiento:hover {
-    background: var(--accent-hover) !important;
+    background: linear-gradient(135deg, var(--accent-hover) 0%, #FEECE6 100%) !important;
     color: #2C2C2C !important;
     border-color: var(--accent-hover) !important;
+    box-shadow: 0 6px 25px 0 var(--accent-hover), 0 12px 40px 0 rgba(250, 212, 207, 0.6) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+body.tema-claro .boton-sentimiento:active {
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow: 0 3px 15px 0 var(--accent) !important;
+}
+
+@keyframes botonPulsarClaro {
+    0%, 100% {
+        box-shadow: 0 4px 20px 0 var(--accent), 0 8px 32px 0 rgba(250, 212, 207, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 25px 0 var(--accent-hover), 0 12px 40px 0 rgba(250, 212, 207, 0.6);
+    }
 }
 body.tema-claro .opcion-emocion {
     background: var(--accent) !important;
@@ -126,24 +142,60 @@ body.tema-oscuro {
     box-shadow: 0 4px 32px 0 var(--border);
 }
 .boton-sentimiento, .boton-nueva-frase {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
     color: #0D0A1E;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 32px;
-    font-size: 1.1rem;
+    border: 2px solid var(--accent);
+    border-radius: 25px;
+    padding: 16px 40px;
+    font-size: 1.2rem;
     font-family: 'Arial', sans-serif;
+    font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 2px 16px 0 var(--border);
-    transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px 0 var(--accent), 0 8px 32px 0 rgba(162, 89, 255, 0.3);
+    transition: all 0.3s ease;
     margin-top: 12px;
     margin-bottom: 0;
     z-index: 2;
+    position: relative;
+    overflow: hidden;
+    animation: botonPulsar 2s ease-in-out infinite;
 }
+
+.boton-sentimiento::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.boton-sentimiento:hover::before {
+    left: 100%;
+}
+
 .boton-sentimiento:hover, .boton-nueva-frase:hover {
-    background: var(--accent-hover);
+    background: linear-gradient(135deg, var(--accent-hover) 0%, #E6B3FF 100%);
     color: #0D0A1E;
-    box-shadow: 0 4px 32px 0 var(--accent-hover);
+    box-shadow: 0 6px 25px 0 var(--accent-hover), 0 12px 40px 0 rgba(216, 124, 235, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    border-color: var(--accent-hover);
+}
+
+.boton-sentimiento:active, .boton-nueva-frase:active {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 3px 15px 0 var(--accent);
+}
+
+@keyframes botonPulsar {
+    0%, 100% {
+        box-shadow: 0 4px 20px 0 var(--accent), 0 8px 32px 0 rgba(162, 89, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 6px 25px 0 var(--accent-hover), 0 12px 40px 0 rgba(216, 124, 235, 0.5);
+    }
 }
 .modal {
     position: fixed;
