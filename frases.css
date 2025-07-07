@@ -30,6 +30,52 @@ body.tema-claro {
     background: linear-gradient(180deg, #FAD4CF 0%, #FEECE6 100%) !important;
     color: #2C2C2C !important;
 }
+body.tema-claro .frase-central {
+    background: rgba(255,255,255,0.92) !important;
+    color: #2C2C2C !important;
+    box-shadow: 0 4px 32px 0 #D6CBC7;
+}
+body.tema-claro .modal {
+    background: rgba(250,212,207,0.78) !important;
+}
+body.tema-claro .modal-contenido {
+    background: rgba(255,255,255,0.92) !important;
+    color: #2C2C2C !important;
+    box-shadow: 0 4px 32px 0 #D6CBC7 !important;
+}
+body.tema-claro .boton-sentimiento {
+    background: var(--accent) !important;
+    color: #2C2C2C !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 2px 16px 0 #D6CBC7 !important;
+}
+body.tema-claro .boton-sentimiento:hover {
+    background: var(--accent-hover) !important;
+    color: #2C2C2C !important;
+    border-color: var(--accent-hover) !important;
+}
+body.tema-claro .opcion-emocion {
+    background: var(--accent) !important;
+    color: #2C2C2C !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 2px 16px 0 #D6CBC7 !important;
+}
+body.tema-claro .opcion-emocion:hover {
+    background: var(--accent-hover) !important;
+    color: #2C2C2C !important;
+    border-color: var(--accent-hover) !important;
+}
+body.tema-claro .boton-nueva-frase {
+    background: var(--accent) !important;
+    color: #2C2C2C !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 2px 16px 0 #D6CBC7 !important;
+}
+body.tema-claro .boton-nueva-frase:hover {
+    background: var(--accent-hover) !important;
+    color: #2C2C2C !important;
+    border-color: var(--accent-hover) !important;
+}
 
 body.tema-oscuro {
     --bg-main: #120d1e;
