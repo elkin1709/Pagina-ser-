@@ -183,16 +183,132 @@ const frasesFortuna = [
 
 let fraseActual = 0;
 
-// Función para mostrar una frase aleatoria
-function mostrarFraseAleatoria() {
-    fraseActual = Math.floor(Math.random() * frasesFortuna.length);
-    document.getElementById('frase-fortuna').textContent = frasesFortuna[fraseActual];
+// Función para obtener la fecha actual en formato YYYY-MM-DD
+function obtenerFechaActual() {
+    const hoy = new Date();
+    return hoy.toISOString().split('T')[0]; // Formato: YYYY-MM-DD
 }
 
-// Función para mostrar la siguiente frase
+// Función para verificar si ya se mostró una frase hoy
+function yaSeMostroFraseHoy() {
+    const fechaActual = obtenerFechaActual();
+    const ultimaFecha = localStorage.getItem('ultimaFechaFrase');
+    return ultimaFecha === fechaActual;
+}
+
+// Función para guardar la frase del día
+function guardarFraseDelDia(fraseIndex) {
+    const fechaActual = obtenerFechaActual();
+    localStorage.setItem('ultimaFechaFrase', fechaActual);
+    localStorage.setItem('fraseDelDia', fraseIndex);
+}
+
+// Función para obtener la frase del día guardada
+function obtenerFraseDelDia() {
+    const fraseIndex = localStorage.getItem('fraseDelDia');
+    return fraseIndex ? parseInt(fraseIndex) : null;
+}
+
+// Función para mostrar una frase aleatoria (solo una por día)
+function mostrarFraseAleatoria() {
+    const fraseFortunaElement = document.getElementById('frase-fortuna');
+    
+    if (yaSeMostroFraseHoy()) {
+        // Si ya se mostró una frase hoy, mostrar la misma con contador
+        const fraseIndex = obtenerFraseDelDia();
+        if (fraseIndex !== null) {
+            fraseActual = fraseIndex;
+            const tiempo = calcularTiempoRestante();
+            fraseFortunaElement.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 1.1rem; margin-bottom: 15px; color: var(--accent);">✨ Tu frase del día:</div>
+                    <div style="font-size: 1rem; line-height: 1.6; margin-bottom: 20px;">${frasesFortuna[fraseActual]}</div>
+                    <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 15px;">
+                        <div style="font-size: 0.9rem; color: var(--accent); margin-bottom: 10px;">Próxima frase en:</div>
+                        <div id="contador-frase" style="font-size: 1.3rem; font-weight: bold; color: var(--accent); font-family: monospace; background: rgba(162, 89, 255, 0.1); padding: 8px 12px; border-radius: 6px; display: inline-block;">
+                            ${formatearTiempo(tiempo.horas, tiempo.minutos, tiempo.segundos)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Fallback: mostrar una frase aleatoria
+            fraseActual = Math.floor(Math.random() * frasesFortuna.length);
+            fraseFortunaElement.textContent = frasesFortuna[fraseActual];
+        }
+        
+        // Iniciar el contador
+        setTimeout(() => {
+            actualizarContador();
+            setInterval(actualizarContador, 1000);
+        }, 100);
+    } else {
+        // Si es un nuevo día, mostrar una nueva frase aleatoria
+        fraseActual = Math.floor(Math.random() * frasesFortuna.length);
+        fraseFortunaElement.textContent = frasesFortuna[fraseActual];
+        guardarFraseDelDia(fraseActual);
+    }
+}
+
+// Función para calcular el tiempo restante hasta la próxima frase
+function calcularTiempoRestante() {
+    const ahora = new Date();
+    const manana = new Date(ahora);
+    manana.setDate(manana.getDate() + 1);
+    manana.setHours(0, 0, 0, 0); // Inicio del día siguiente
+    
+    const tiempoRestante = manana - ahora;
+    const horas = Math.floor(tiempoRestante / (1000 * 60 * 60));
+    const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+    
+    return { horas, minutos, segundos };
+}
+
+// Función para formatear el tiempo
+function formatearTiempo(horas, minutos, segundos) {
+    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+}
+
+// Función para actualizar el contador
+function actualizarContador() {
+    const contadorElement = document.getElementById('contador-frase');
+    if (contadorElement && yaSeMostroFraseHoy()) {
+        const tiempo = calcularTiempoRestante();
+        contadorElement.textContent = formatearTiempo(tiempo.horas, tiempo.minutos, tiempo.segundos);
+    }
+}
+
+// Función para mostrar la siguiente frase (solo si es un nuevo día)
 function mostrarSiguienteFrase() {
-    fraseActual = (fraseActual + 1) % frasesFortuna.length;
-    document.getElementById('frase-fortuna').textContent = frasesFortuna[fraseActual];
+    const fraseFortunaElement = document.getElementById('frase-fortuna');
+    
+    if (yaSeMostroFraseHoy()) {
+        // Si ya se mostró una frase hoy, mostrar mensaje con contador
+        const tiempo = calcularTiempoRestante();
+        fraseFortunaElement.innerHTML = `
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div style="font-size: 1.1rem; margin-bottom: 10px;">Ya has visto tu frase del día ✨</div>
+                <div style="font-size: 0.9rem; color: var(--accent); margin-bottom: 15px;">Próxima frase en:</div>
+                <div id="contador-frase" style="font-size: 1.5rem; font-weight: bold; color: var(--accent); font-family: monospace; background: rgba(162, 89, 255, 0.1); padding: 10px; border-radius: 8px; display: inline-block;">
+                    ${formatearTiempo(tiempo.horas, tiempo.minutos, tiempo.segundos)}
+                </div>
+            </div>
+        `;
+        fraseFortunaElement.style.fontStyle = 'normal';
+        fraseFortunaElement.style.color = 'var(--text-secondary)';
+        
+        // Iniciar el contador
+        actualizarContador();
+        setInterval(actualizarContador, 1000);
+    } else {
+        // Si es un nuevo día, mostrar la siguiente frase
+        fraseActual = (fraseActual + 1) % frasesFortuna.length;
+        fraseFortunaElement.textContent = frasesFortuna[fraseActual];
+        fraseFortunaElement.style.fontStyle = 'normal';
+        fraseFortunaElement.style.color = 'var(--text-secondary)';
+        guardarFraseDelDia(fraseActual);
+    }
 }
 
 // Al seleccionar una emoción, mostrar el modal de la galleta
@@ -222,6 +338,32 @@ if (opcionesEmocion.length) {
             // Mostrar frase después de que se rompa la galleta
             setTimeout(function() {
                 mostrarFraseAleatoria();
+                
+                // Si ya se mostró una frase hoy, agregar un indicador visual
+                if (yaSeMostroFraseHoy()) {
+                    const fraseFortunaElement = document.getElementById('frase-fortuna');
+                    fraseFortunaElement.style.borderLeft = '4px solid #FFD700'; // Borde dorado
+                    fraseFortunaElement.style.position = 'relative';
+                    
+                    // Agregar un pequeño indicador de "ya visto"
+                    if (!fraseFortunaElement.querySelector('.indicador-visto')) {
+                        const indicador = document.createElement('div');
+                        indicador.className = 'indicador-visto';
+                        indicador.innerHTML = '✨ Frase del día';
+                        indicador.style.cssText = `
+                            position: absolute;
+                            top: -10px;
+                            right: 10px;
+                            background: var(--accent);
+                            color: var(--bg-card);
+                            padding: 4px 8px;
+                            border-radius: 12px;
+                            font-size: 0.8rem;
+                            font-weight: bold;
+                        `;
+                        fraseFortunaElement.appendChild(indicador);
+                    }
+                }
             }, 1300);
         };
     });
@@ -231,6 +373,18 @@ if (opcionesEmocion.length) {
 const btnNuevaFrase = document.getElementById('boton-nueva-frase');
 if (btnNuevaFrase) {
     btnNuevaFrase.onclick = function() {
+        if (yaSeMostroFraseHoy()) {
+            // Cambiar el texto del botón temporalmente
+            const textoOriginal = btnNuevaFrase.textContent;
+            btnNuevaFrase.textContent = "¡Mañana más! ✨";
+            btnNuevaFrase.style.opacity = "0.7";
+            
+            // Restaurar después de 2 segundos
+            setTimeout(() => {
+                btnNuevaFrase.textContent = textoOriginal;
+                btnNuevaFrase.style.opacity = "1";
+            }, 2000);
+        }
         mostrarSiguienteFrase();
     };
 }
@@ -325,8 +479,22 @@ if (document.getElementById('frase-typing')) {
   });
 })();
 
+// Función para verificar si es un nuevo día y reiniciar si es necesario
+function verificarNuevoDia() {
+    const fechaActual = obtenerFechaActual();
+    const ultimaFecha = localStorage.getItem('ultimaFechaFrase');
+    
+    if (ultimaFecha && ultimaFecha !== fechaActual) {
+        // Es un nuevo día, limpiar el localStorage de la frase anterior
+        localStorage.removeItem('ultimaFechaFrase');
+        localStorage.removeItem('fraseDelDia');
+        console.log('¡Nuevo día! Sistema de frases reiniciado.');
+    }
+}
+
 // Mostrar frase motivacional al cargar frases.html
 if (document.getElementById('frase-fortuna')) {
+    verificarNuevoDia(); // Verificar si es un nuevo día
     mostrarFraseAleatoria();
 }
 

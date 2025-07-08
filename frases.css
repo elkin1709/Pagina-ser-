@@ -485,6 +485,38 @@ body.tema-oscuro {
     }
 }
 
+/* Estilos para el contador de tiempo */
+#contador-frase {
+    animation: contadorPulsar 2s ease-in-out infinite;
+    box-shadow: 0 2px 8px 0 rgba(162, 89, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+#contador-frase:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px 0 rgba(162, 89, 255, 0.5);
+}
+
+@keyframes contadorPulsar {
+    0%, 100% {
+        box-shadow: 0 2px 8px 0 rgba(162, 89, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 16px 0 rgba(162, 89, 255, 0.6);
+    }
+}
+
+/* Estilos para el tema claro */
+body.tema-claro #contador-frase {
+    background: rgba(250, 212, 207, 0.3) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 2px 8px 0 rgba(250, 212, 207, 0.4) !important;
+}
+
+body.tema-claro #contador-frase:hover {
+    box-shadow: 0 4px 16px 0 rgba(250, 212, 207, 0.6) !important;
+}
+
 .modal-contenido.galleta-contenido {
     display: flex;
     flex-direction: column;
